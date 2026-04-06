@@ -1,9 +1,7 @@
 #!/bin/bash
 set -e
 
-# Выполняем SQL команды, используя psql
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-    -- Создаем таблицу для логов
     CREATE TABLE user_logs (
         courseid INTEGER,
         userid INTEGER,
@@ -29,12 +27,22 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         Date_vAtt VARCHAR(255)
     );
 
-    -- Копируем данные из локального CSV файла (внутри контейнера) в созданную таблицу
+    CREATE TABLE departments (
+        id INTEGER PRIMARY KEY,
+        name VARCHAR(255) NOT NULL
+    );
+
     \copy user_logs FROM '/datasets/aggrigation_logs_per_week.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',');
 
+    \copy departments FROM '/datasets/departments.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',');
+
+    ALTER TABLE user_logs ADD COLUMN depart_int INTEGER;
+
+    UPDATE user_logs SET depart_int = CAST(Depart AS INTEGER);
+
+    SELECT u.userid, u.courseid, d.name 
+    FROM user_logs u 
+    LEFT JOIN departments d ON u.depart_int = d.id 
+    LIMIT 10;
+
 EOSQL
-
-
-
-
-
