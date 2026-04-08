@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  postgres:
+    build: .
+    container_name: postgres_logs_db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      SECRET_HASH: ${SECRET_HASH}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - ${VOLUME_NAME}:/var/lib/postgresql/data
+      - ./datasets:/datasets
+      - ./init.sh:/docker-entrypoint-initdb.d/init.sh
+
+volumes:
+  pgdata_IU5-23:   # Имя тома должно совпадать со значением VOLUME_NAME из .env

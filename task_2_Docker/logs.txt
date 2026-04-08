@@ -1,0 +1,52 @@
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+initdb: warning: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+waiting for server to start....2026-04-06 09:36:11.036 UTC [48] LOG:  starting PostgreSQL 13.23 (Debian 13.23-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-04-06 09:36:11.050 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-04-06 09:36:11.088 UTC [49] LOG:  database system was shut down at 2026-04-06 09:36:10 UTC
+2026-04-06 09:36:11.124 UTC [48] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/init.sh
+/usr/local/bin/docker-entrypoint.sh: line 203: /docker-entrypoint-initdb.d/init.sh: cannot execute: required file not found
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+2026-04-06 09:36:48.472 UTC [1] LOG:  starting PostgreSQL 13.23 (Debian 13.23-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-04-06 09:36:48.473 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-04-06 09:36:48.473 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-04-06 09:36:48.492 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-04-06 09:36:48.520 UTC [28] LOG:  database system was interrupted; last known up at 2026-04-06 09:36:11 UTC
+2026-04-06 09:36:49.275 UTC [28] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-04-06 09:36:49.292 UTC [28] LOG:  redo starts at 0/15DDC40
+2026-04-06 09:36:49.293 UTC [28] LOG:  invalid record length at 0/15DDD38: wanted 24, got 0
+2026-04-06 09:36:49.293 UTC [28] LOG:  redo done at 0/15DDCF0
+2026-04-06 09:36:49.391 UTC [1] LOG:  database system is ready to accept connections
